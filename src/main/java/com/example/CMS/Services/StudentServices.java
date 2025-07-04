@@ -1,6 +1,6 @@
-package Services;
+package com.example.CMS.Services;
 
-import Modules.Student;
+import com.example.CMS.Modules.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;

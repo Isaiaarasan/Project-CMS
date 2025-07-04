@@ -1,4 +1,4 @@
-package Modules;
+package com.example.CMS.Modules;
 
 import lombok.Data;
 
