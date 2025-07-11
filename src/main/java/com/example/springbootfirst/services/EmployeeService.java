@@ -30,9 +30,13 @@ public class EmployeeService {
         return "Employee Added Successfully";
     }
 
-    public String updateEmployee(int empId) {
+    public String updateEmployee(int empId, RegisterDetails details) {
         RegisterDetails user = registerDetailsRepository.findById(empId)
                 .orElseThrow(()->new RuntimeException("No Such User Present"));
+        user.setName(details.getName());
+        user.setEmail(details.getEmail());
+        user.setUserName(details.getUserName());
+        user.setPassword(details.getPassword());
         registerDetailsRepository.save(user);
         return "Employee Updated Successfully";
     }
