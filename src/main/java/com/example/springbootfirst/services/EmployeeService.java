@@ -30,7 +30,7 @@ public class EmployeeService {
         return "Employee Added Successfully";
     }
 
-    public String updateEmployee(int empId) {
+    public String updateEmployee(int empId, RegisterDetails details) {
         RegisterDetails user = registerDetailsRepository.findById(empId)
                 .orElseThrow(()->new RuntimeException("No Such User Present"));
         registerDetailsRepository.save(user);
