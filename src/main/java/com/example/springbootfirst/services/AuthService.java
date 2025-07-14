@@ -20,7 +20,6 @@ import java.util.Set;
 
 @Service
 public class AuthService {
-
     @Autowired
     RegisterDetailsRepository registerDetailsRepository;
 
@@ -65,7 +64,7 @@ public class AuthService {
         return jwtTokenProvider.generateToken(authentication);
     }
 
-    public Optional<RegisterDetails>getUserByUsername(String username){
+    public Optional<RegisterDetails> getUserByUsername(String username){
         return registerRepo.findByUserName(username);
     }
 

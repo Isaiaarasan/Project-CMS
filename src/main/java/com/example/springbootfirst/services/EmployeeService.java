@@ -30,13 +30,9 @@ public class EmployeeService {
         return "Employee Added Successfully";
     }
 
-    public String updateEmployee(int empId, RegisterDetails details) {
+    public String updateEmployee(int empId) {
         RegisterDetails user = registerDetailsRepository.findById(empId)
                 .orElseThrow(()->new RuntimeException("No Such User Present"));
-        user.setName(details.getName());
-        user.setEmail(details.getEmail());
-        user.setUserName(details.getUserName());
-        user.setPassword(details.getPassword());
         registerDetailsRepository.save(user);
         return "Employee Updated Successfully";
     }
@@ -44,5 +40,10 @@ public class EmployeeService {
     public String deleteEmployeeById(int empID) {
         registerDetailsRepository.deleteById(empID);
         return "Employee Deleted Successfully";
+    }
+
+    public List<RegisterDetails> getEmployeeByJob(String job) {
+        return List.of();
+
     }
 }
