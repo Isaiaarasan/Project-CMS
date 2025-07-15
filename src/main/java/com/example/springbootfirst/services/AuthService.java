@@ -70,5 +70,6 @@ public class AuthService {
 
 
     public String loginUser(RegisterDetails login) {
+        return null;
     }
 }
