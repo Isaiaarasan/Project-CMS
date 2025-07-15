@@ -1,6 +1,6 @@
 package com.example.springbootfirst;
 
-import com.training.demo.controllers.Calculator;
+import com.example.springbootfirst.controllers.Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
