@@ -69,4 +69,6 @@ public class AuthService {
     }
 
 
+    public String loginUser(RegisterDetails login) {
+    }
 }
