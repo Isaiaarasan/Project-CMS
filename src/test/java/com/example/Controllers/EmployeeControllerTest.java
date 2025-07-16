@@ -1,10 +1,8 @@
 package com.example.Controllers;
-
-import com.example.deploy.models.RegisterDetails;
-import com.example.deploy.models.UserDetailsDto;
-import com.example.deploy.services.EmployeeService;
-
 import com.example.springbootfirst.controllers.EmployeeController;
+import com.example.springbootfirst.models.RegisterDetails;
+import com.example.springbootfirst.models.UserDetailsDto;
+import com.example.springbootfirst.services.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class EmployeeControllerTest {
-
     @Mock
     EmployeeService employeeService;
 
@@ -32,76 +29,74 @@ class EmployeeControllerTest {
 
     @Test
     void testRoute(){
-        String result = employeeController.route();
-        assertEquals("Welcome to SpringBoot Security", result);
-        System.out.println("23EC184 - testRoute passed");
+        String result = employeeController.route();;
+        assertEquals("Welcome to Springboot Security",result);
     }
 
     @Test
-    void testgetMethod(){
-        RegisterDetails emp1 = new RegisterDetails();
-        emp1.setName("vishwaridha");
-        emp1.setEmail("vishwa@gmail.com");
-
-        RegisterDetails emp2 = new RegisterDetails();
-        emp2.setName("vishwaridha");
-        emp2.setEmail("vishwa@gmail.com");
-
-        when(employeeService.getMethod()).thenReturn(Arrays.asList(emp1, emp2));
+    void testGetMethod(){
+        RegisterDetails emp1=new RegisterDetails();
+        RegisterDetails emp2=new RegisterDetails();
+        when(employeeService.getMethod()).thenReturn(Arrays.asList(emp1,emp2));
         List<RegisterDetails> result = employeeController.getMethod();
-        assertEquals(2, result.size());
-        assertEquals("vishwaridha", result.get(0).getName());
-        assertEquals("vishwa@gmail.com", result.get(0).getEmail());
-
-        System.out.println("23EC184 - testgetMethod passed");
+        assertEquals(2,result.size());
     }
 
     @Test
-    void testgetEmployeeById(){
-        int empid = 1;
-        RegisterDetails emp1 = new RegisterDetails();
-        emp1.setEmpID(empid);
-        emp1.setName("vishwaridha");
-        emp1.setEmail("vishwa@gmail.com");
+    void testGetEmployeeById() {
+        RegisterDetails emp = new RegisterDetails();
+        emp.setEmpId(1);
+        emp.setName("Test Employee");
 
-        when(employeeService.getEmployeeById(empid)).thenReturn(emp1);
-        RegisterDetails result = employeeController.getEmployeeById(empid);
-        assertEquals(empid, result.getEmpID());
-        assertEquals("vishwaridha", result.getName());
-        assertEquals("vishwa@gmail.com", result.getEmail());
+        when(employeeService.getEmployeeById(1)).thenReturn(emp);
+        RegisterDetails result = employeeController.getEmployeeById(1);
 
-        System.out.println("23EC184 - testgetEmployeeById passed");
+        assertNotNull(result);
+        assertEquals("Test Employee", result.getName());
     }
 
     @Test
-    void testaddnewEmployee(){
-        UserDetailsDto user = new UserDetailsDto();
-        user.setName("vishwaridha");
-        user.setEmail("vishwa@gmail.com");
-        user.setPassword("vish3007#");
+    void testGetEmployeeByRole() {
+        RegisterDetails emp = new RegisterDetails();
+        emp.setEmpId(1);
+        emp.setName("Admin");
 
-        String expectedMessage = "Employee added successfully";
-        when(employeeService.addNewEmployee(user)).thenReturn(expectedMessage);
-        String result = employeeController.addnewEmployee(user);
-        assertEquals(expectedMessage, result);
+        when(employeeService.getEmployeeByRole("ADMIN")).thenReturn(emp);
+        RegisterDetails result = employeeController.getEmployeeByRole("ADMIN");
 
-        System.out.println("23EC184 - testaddnewEmployee passed");
+        assertNotNull(result);
+        assertEquals("Admin", result.getName());
     }
 
     @Test
-    void testupdateEmployee(){
-        int empId = 1;
-        UserDetailsDto user = new UserDetailsDto();
-        user.setName("vishwaridha");
-        user.setEmail("vishwa@gmail.com");
+    void testPostMethod() {
+        UserDetailsDto dto = new UserDetailsDto();
+        dto.setEmpId(1);
+        dto.setName("John");
 
-        String expectedMessage = "Employee updated successfully";
-        when(employeeService.updateEmployee(empId, user)).thenReturn(expectedMessage);
-        String result = employeeController.updateEmployee(empId, user);
-        assertEquals(expectedMessage, result);
+        when(employeeService.addEmployee(dto)).thenReturn("Employee Added Successfully");
+        String result = employeeController.postMethod(dto);
 
-        System.out.println("23EC184 - testupdateEmployee passed");
-
-
+        assertEquals("Employee Added Successfully", result);
     }
+
+    @Test
+    void testPutMethod() {
+        UserDetailsDto dto = new UserDetailsDto();
+        dto.setName("Updated Name");
+
+        when(employeeService.updateEmployee(1, dto)).thenReturn("Employee updated successfully");
+        String result = employeeController.putMethod(1, dto);
+
+        assertEquals("Employee updated successfully", result);
+    }
+
+    @Test
+    void testDeleteMethod() {
+        when(employeeService.deleteEmployee(1)).thenReturn("Employee deleted successfully");
+        String result = employeeController.deleteMethod(1);
+
+        assertEquals("Employee deleted successfully", result);
+    }
+
 }
