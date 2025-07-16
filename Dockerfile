@@ -5,4 +5,4 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17.0.1-jdk-slim
 COPY --from=build /target/*.jar springbootfirst.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","Springbootfirst.jar"]
+ENTRYPOINT ["java","-jar","springbootfirst.jar"]
