@@ -2,13 +2,19 @@ package com.example.springbootfirst.services;
 
 import com.example.springbootfirst.models.RegisterDetails;
 import com.example.springbootfirst.repository.RegisterDetailsRepository;
+import com.example.springbootfirst.repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EmployeeService {
+    @Autowired
+    public RolesRepository rolesRepository;
+    @Autowired
+    public PasswordEncoder passwordEncoder;
     @Autowired
     RegisterDetailsRepository registerDetailsRepository;
 
@@ -25,10 +31,10 @@ public class EmployeeService {
 //        return registerDetailsRepository.findByRole();
 //    }
 
-    public String addEmployee(RegisterDetails employee) {
-        registerDetailsRepository.save(employee);
-        return "Employee Added Successfully";
-    }
+//    public String addEmployee(UserDetailsDto employee) {
+//        registerDetailsRepository.save(employee);
+//        return "Employee Added Successfully";
+//    }
 
     public String updateEmployee(int empId, RegisterDetails details) {
         RegisterDetails user = registerDetailsRepository.findById(empId)
@@ -37,7 +43,7 @@ public class EmployeeService {
         return "Employee Updated Successfully";
     }
 
-    public String deleteEmployeeById(int empID) {
+    public String deleteEmployee(int empID) {
         registerDetailsRepository.deleteById(empID);
         return "Employee Deleted Successfully";
     }
@@ -46,4 +52,6 @@ public class EmployeeService {
         return List.of();
 
     }
+
+
 }

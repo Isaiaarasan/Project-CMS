@@ -60,12 +60,12 @@ public class EmployeeController {
 //        return employeeService.getEmployeeByJob(job);
 //    }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/employee")
-    public String postMethod(@RequestBody RegisterDetails employee){
-//        Employee employee = new Employee(5,"Sivagami", "Business");
-        return employeeService.addEmployee(employee);
-    }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PostMapping("/employee")
+//    public String postMethod(@RequestBody RegisterDetails employee){
+////        Employee employee = new Employee(5,"Sivagami", "Business");
+//        return employeeService.addEmployee(employee);
+//    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/employee/{empId}")
@@ -75,7 +75,7 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/employee/{empID}")
-    public String deleteMethod(@PathVariable int empID){
-        return employeeService.deleteEmployeeById(empID);
+    public String deleteEmployee(@PathVariable int empID){
+        return employeeService.deleteEmployee(empID);
     }
 }

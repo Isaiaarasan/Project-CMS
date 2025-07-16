@@ -4,6 +4,7 @@ import com.example.springbootfirst.models.RegisterDetails;
 import com.example.springbootfirst.models.UserDetailsDto;
 import com.example.springbootfirst.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class AuthController {
     private AuthService authService;
 
     @GetMapping
-    public List<RegisterDetails> getRegisterDetails(){
+    public List<RegisterDetails> getRegisterDetails() {
         return authService.getRegisterDetails();
     }
 
@@ -31,4 +32,10 @@ public class AuthController {
         return authService.loginUser(login);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<String> Login(@RequestBody RegisterDetails login) {
+        String response = authService.authenticate(login);
+        return ResponseEntity.ok(response);
+
+    }
 }
